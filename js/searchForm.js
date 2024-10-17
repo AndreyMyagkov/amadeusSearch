@@ -97,6 +97,7 @@ class IBESearch {
      */
     initControls() {
         this.destinationControl = new DestinationControl(this.t);
+        this.destinationDate = new CalendarControl('.js-ibe-deparure-calendar', 'ddate', this.t);
     }
 
     /**
