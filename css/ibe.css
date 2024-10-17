@@ -1,0 +1,229 @@
+.ibe {
+    --ibe-color-font: hsl(0, 0%, 20%);
+    --ibe-color-font-50: hsl(0, 0%, 50%);
+
+    --ibe-form-bg: #E5F5FC;
+    --ibe-control-min-height: 36px;
+    --ibe-bg-element-hover: #ffcae6;
+
+    --ibe-color-primary: #CA0036;
+    --ibe-color-secondary: #006592;
+
+    --ibe-btn-primary-color: var(--ibe-color-primary);
+    --ibe-btn-secondary-color: var(--ibe-color-secondary);
+}
+
+
+.ibe *,
+.ibe *:after,
+.ibe *:before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    line-height: 1.2;
+}
+
+.ibe ul,
+.ibe li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.ibe svg {
+    display: block;
+    height: 1em;
+    color: currentColor;
+}
+.ibe {
+    color: var(--ibe-color-font);
+}
+
+/****/
+
+
+.ibe .hide { 
+    display: none;
+}
+.ibe__form {
+    background: var(--ibe-form-bg);
+    padding: 16px;
+}
+.ibe__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.ibe__col {
+    flex: 1 1 100%;
+    position: relative;
+}
+
+@media (min-width: 1000px) {
+    .ibe__col {
+        flex: 1 1;
+
+    }
+}
+
+.ibe__toggler {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    position: relative;
+    background: white;
+    border-bottom: 1px solid #333333;
+    padding: 8px 10px;
+    min-height: var(--ibe-control-min-height);
+}
+.ibe__toggler:hover {
+    background-color: #f9f9f9;
+}
+.ibe__toggler-icon {
+    flex: 0 0 20px;
+}
+.ibe__toggler-val {
+    flex: 1 1 calc(100% - 20px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--ibe-color-font-50);
+}
+.ibe-toggler-val_selected {
+    color: var(--ibe-color-font);
+}
+
+.ibe-dropdown {
+    min-width: 100%;
+    height: auto;
+    overflow-x: hidden;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
+    padding: 5px 16px 5px 16px;
+    z-index: 3001;
+}
+
+
+.ibe-dropdown__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.ibe-dropdown-header {
+    flex: 1 1 calc(100% - 20px);
+    font-weight: 500;
+}
+.ibe__btn-close {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ibe-dropdown__content { 
+
+}
+
+.ibe__overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.ibe-destination { }
+.ibe-destination__val { }
+.ibe-destination__dropdown { }
+.ibe-destination__content {
+    margin: 0 -16px;
+}
+
+.ibe-destination__input {
+    border: none;
+   /* height: 100%;*/
+    width: 100%;
+}
+.ibe-destination__list {
+
+}
+.ibe-destination__list li {
+    padding: 5px 16px;
+    cursor: pointer;
+}
+.ibe-destination__list li:hover {
+    background-color: var(--ibe-bg-element-hover);
+}
+
+.ibe-destination__noresult {
+    padding: 5px 16px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+
+/* Tourists */
+.ibe-tourists__row {
+    margin-top: 12px;
+}
+.ibe-tourists__label {
+    color: var(--ibe-color-font);
+    margin-bottom: 0.5em;
+}
+
+
+.ibe-quantity {
+    padding: 0;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 30px 1fr 30px;
+}
+
+.ibe-quantity__minus,
+.ibe-quantity__plus {
+    background: var(--ibe-btn-secondary-color);
+    border: none;
+    height: 30px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.ibe-quantity__input {
+    background: #f5f5f5;
+    border: none;
+    height: 30px;
+    text-align: center;
+    font-weight: 500;
+}
+
+
+.ibe-tourists__select {
+    padding: 0.375em 2.25em 0.375em 1em;
+    -moz-padding-start: calc(1em - 3px);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23444'%3E%3Cpath d='M15.9 3.93a.34.34 0 0 0-.49 0L8 11.33.59 3.93a.34.34 0 0 0-.49 0 .36.36 0 0 0 0 .49l7.65 7.65a.36.36 0 0 0 .5 0l7.65-7.65a.36.36 0 0 0 0-.49Z'/%3E%3C/svg%3E");
+    background-color: #f5f5f5;
+    background-repeat: no-repeat;
+    background-position: right 0.8333em center;
+    background-size: 16px 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: var(--ibe-color-font);
+    width: 100%;
+    height: 30px;
+}
