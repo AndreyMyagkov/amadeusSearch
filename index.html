@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +58,7 @@ main
                         </div>
                     </div>
                     <div class="ibe-dropdown__content ibe-departure__content">
+                        <div class="js-ibe-departure-control"></div>
                         <details class="ibe-details">
                             <summary class="ibe-summary">
                                 Deutschland
@@ -66,10 +67,26 @@ main
                                 <div class="col-6 col-md-3 col-lg-3">
                                     <div class="ibe-airport__group">
                                         <label class="ibe-airport__label">
-                                            <input type="checkbox" name="qw" value="test" class="ibe-airport__checkbox" checked> Berlin Brandenburg
+                                            <input type="checkbox" value="all" class="ibe-airport__checkbox">All
                                         </label>
                                     </div>
-                                    <div class="ibe-airport__list"></div>
+                                    <div class="ibe-airport__list">
+                                        <div class="ibe-airport__item">
+                                            <label class="ibe-airport__label">
+                                                <input type="checkbox" value="bre" class="ibe-airport__checkbox">Berlin Brandenburg
+                                            </label>
+                                        </div>
+                                        <div class="ibe-airport__item">
+                                            <label class="ibe-airport__label">
+                                                <input type="checkbox" value="dre" class="ibe-airport__checkbox">Dresden
+                                            </label>
+                                        </div>
+                                        <div class="ibe-airport__item">
+                                            <label class="ibe-airport__label">
+                                                <input type="checkbox" value="mun" class="ibe-airport__checkbox">Munchen
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </details>
@@ -303,7 +320,7 @@ main
     }
 
     body {
-        font-family: 'Open Sans', Arial sans-serif;
+        font-family: 'Open Sans', Arial, sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -347,9 +364,9 @@ main
 <!-- <link rel="stylesheet" href="search.amadeus.css"> -->
 <!-- TODO: ajax-->
 <script src="data/regions.js"></script>
-
 <script src="js/controls/quantity.js"></script>
 <script src="js/controls/destination.js"></script>
+<script src="js/controls/airport.js"></script>
 <script src="js/controls/tourists.js"></script>
 <script src="js/controls/calendar.js"></script>
 <script src="js/controls/duration.js"></script>
