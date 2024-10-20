@@ -36,6 +36,7 @@ class AirportControl {
         let html = '';
         airports.forEach(country => {
             const countryHtml = '';
+
         })
 
     }
