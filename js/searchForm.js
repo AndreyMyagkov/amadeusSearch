@@ -116,6 +116,9 @@ class IBESearch {
         console.log(`region: ${id} ${name}`)
 
     }
+    setAirports(value) {
+        console.log(`airports: ${value}`)
+    }
     /**
      * Устанавливает значение формы для туристов
      * @param {*} 

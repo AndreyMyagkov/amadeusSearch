@@ -15,16 +15,16 @@ const airports = [
                         value: "DRS"
                     },
                     {
-                        name: "ERF",
-                        value: "Erfurt Weimar"
+                        name: "Erfurt Weimar",
+                        value: "ERF"
                     },
                     {
-                        name: "HDF",
-                        value: "Heringsdorf"
+                        name: "Heringsdorf",
+                        value: "HDF"
                     },
                     {
-                        name: "LEJ",
-                        value: "Leipzig Halle"
+                        name: "Leipzig Halle",
+                        value: "LEJ"
                     }
                 ]
             },
@@ -311,6 +311,8 @@ const airports = [
 
 /**
  * Класс уповления контролом выбора аэропортов
+ * клик по чек: setValue, setAlLprocess
+ * клик по All: setAllprocess
  */
 class AirportControl {
     constructor(selector) {
@@ -324,7 +326,7 @@ class AirportControl {
     render() {
         let html = '';
         let countryHtml = '';
-        airports.forEach(country => {
+        airports.forEach((country, i) => {
             let groupHTML = '';
             country.groups.forEach(group => {
                 let itemsHTML = '';
@@ -334,7 +336,7 @@ class AirportControl {
                 
                 groupHTML += this.renderGroup(group.name, itemsHTML)
             })
-            countryHtml += this.renderCountry(country.countryName, groupHTML);
+            countryHtml += this.renderCountry(country.countryName, groupHTML, i === 0);
         })
         html += countryHtml;
         //console.log(html)
@@ -342,11 +344,47 @@ class AirportControl {
 
     }
     addEventListener() {
-
+        document.querySelectorAll('.js-ibe-airport__ch-item').forEach(_ => _.addEventListener('change', e => this.processChangeItem(e)))
+        document.querySelectorAll('.js-ibe-airport__ch-group').forEach(_ => _.addEventListener('change', e => this.processChangeGroup(e)))
     }
-    renderCountry(countryName, groups) {
+    processChangeItem(e) {
+        const $root = e.target.closest('.js-ibe-airport-col');
+        const $groupCh = $root.querySelector('.js-ibe-airport__ch-group');
+        const $itemsCh = $root.querySelectorAll('.js-ibe-airport__ch-item');
+        const $itemsChChecked = $root.querySelectorAll('.js-ibe-airport__ch-item:checked');
+
+        if ($itemsChChecked.length < $itemsCh.length) {
+            $groupCh.checked = false
+        } else {
+            $groupCh.checked = true
+        }
+
+        this.onChange();
+    }
+    processChangeGroup(e) {
+        const $root = e.target.closest('.js-ibe-airport-col');
+        const $groupCh = e.target;
+        const $itemsCh = $root.querySelectorAll('.js-ibe-airport__ch-item');
+
+        $itemsCh.forEach(_ => _.checked = !!$groupCh.checked);
+        this.onChange();
+    }
+
+    getValue() {
+        const value = [];
+        const $AllitemsCh = this.$root.querySelectorAll('.js-ibe-airport__ch-item:checked');
+        $AllitemsCh.forEach(_ => {
+            _.checked && value.push(_.value)
+        })
+        return value
+    }
+    onChange() {
+        const value = this.getValue();
+        _IBESearch.setAirports(value);
+    }
+    renderCountry(countryName, groups, open) {
         return `
-        <details class="ibe-details">
+        <details class="ibe-details" ${open ? 'open' : ''}>
             <summary class="ibe-summary">${countryName}</summary>
             <div class="row">
                 ${groups}
@@ -356,10 +394,10 @@ class AirportControl {
     }
     renderGroup(groupName, items) {
         return `
-        <div class="col-6 col-md-3 col-lg-3">
+        <div class="col-6 col-md-3 col-lg-3 js-ibe-airport-col">
             <div class="ibe-airport__group">
                 <label class="ibe-airport__label">
-                    <input type="checkbox" value="all" class="ibe-airport__checkbox"><span>${groupName}</span>
+                    <input type="checkbox" value="all" class="ibe-airport__checkbox js-ibe-airport__ch-group"><span>${groupName}</span>
                 </label>
             </div>
             <div class="ibe-airport__list">
@@ -372,7 +410,7 @@ class AirportControl {
         return `
         <div class="ibe-airport__item">
             <label class="ibe-airport__label">
-                <input type="checkbox" value="${value}" class="ibe-airport__checkbox"><span>${name}</span>
+                <input type="checkbox" value="${value}" class="ibe-airport__checkbox js-ibe-airport__ch-item"><span>${name}</span>
             </label>
         </div>
         `
