@@ -179,7 +179,8 @@
 }
 @media (min-width: 1000px) {
     .ibe-departure__dropdown {
-        min-width: 800px;
+        left: calc(-100% - 10px);
+        width: 1248px;
     }
 }
 .ibe-details {
@@ -187,8 +188,10 @@
 }
 .ibe-summary {
     position: relative;
-    border-bottom: solid 1px #E0E0E0;
+    border-bottom: solid 1px var(--ibe-btn-primary-color);;
     margin-bottom: 5px;
+    padding: 5px 0;
+    cursor: pointer;
 }
 .ibe-summary::marker {
     display: none;
@@ -200,14 +203,14 @@
     width: 11px;
     height: 11px;
     right: 11px;
-    top: 0px;
-    border: 2px solid #BDBDBD;
+    top: 7px;
+    border: 2px solid var(--ibe-btn-primary-color);;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 .ibe-details[open] > .ibe-summary::before {
     transform: rotate(225deg);
-    top: 8px;
+    top: 12px;
 }
 
 .ibe-airport__group {
@@ -215,7 +218,7 @@
 }
 
 .ibe-airport__list {
-    padding-left: 1em;
+    padding-left: 0.6em;
 }
 .ibe-airport__item {
     margin-bottom: 5px;
@@ -238,7 +241,7 @@
     border: 1px solid var(--ibe-color-font);
     border-radius: 2px;
     position: relative;
-    top: 0.125em;
+    top: 1px;
 }
 .ibe-airport__checkbox:checked {
     --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
