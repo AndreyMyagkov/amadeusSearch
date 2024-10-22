@@ -436,11 +436,12 @@
 }
 
 .cmsDatePicker__day:hover {
-    background: #ffcae6
+    background: #ffcae6;
+    background: var(--ibe-bg-element-hover);
 }
 
 .cmsDatePicker__day.active {
-    background: var(--base);
+    background: var(--ibe-color-primary);
     color: #ffffff
 }
 

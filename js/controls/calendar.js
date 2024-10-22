@@ -89,20 +89,26 @@ class CalendarControl {
             if (e.target.closest('.cmsDatePicker__day')) {
                 e.stopPropagation();
                 const $day = e.target.parentNode;
-                if (!$day.classList.contains('passed')) {
-                    console.log('день')
-                    console.log($day.dataset.day, $day.dataset.month, $day.dataset.year)
+                if ($day.classList.contains('passed')) {
+                    return
                 }
-                //this.setDate()
+                const $oldSelectedDay = this.$root.querySelector('.active');
+                if ($oldSelectedDay) {
+                    $oldSelectedDay.classList.remove('active');
+                }
+                $day.classList.add('active');
+                console.log($day.dataset.day, $day.dataset.month, $day.dataset.year)
+                
+                this.setDay($day.dataset.day, $day.dataset.month, $day.dataset.year)
             }
         })
-        // this.$root.querySelector('.js-ibe-calendar__month-prev').addEventListener('click', (e) => {
-        //     this.datepickerMonthChange(e.target, -1, 1)
-        // })
+        
+    }
 
-        // this.$root.querySelector('.js-ibe-calendar__month-next').addEventListener('click', (e) => {
-        //     this.datepickerMonthChange(e.target, 1, 1)
-        // })
+    setDay(d, m, y) {
+        this.day = d;
+        this.month = m;
+        this.year = y;
     }
     /**
      * Изменяет текущий месяц датапикера
