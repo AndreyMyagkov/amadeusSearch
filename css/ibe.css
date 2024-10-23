@@ -101,6 +101,7 @@
     color:#fff;
     padding: 5px 10px;
     text-decoration: none;
+    border-radius: 5px 5px 0 0;
 }
 .ibe-tabs__tab:not(.active) {
     cursor: pointer;
