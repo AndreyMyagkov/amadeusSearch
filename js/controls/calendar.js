@@ -85,7 +85,7 @@ class CalendarControl {
             if (e.target.closest('.js-ibe-calendar__month-next')) {
                 this.datepickerMonthChange(e.target, 1, 1)
             }
-
+//TODO: refactor
             if (e.target.closest('.cmsDatePicker__day')) {
                 e.stopPropagation();
                 const $day = e.target.parentNode;
@@ -109,6 +109,11 @@ class CalendarControl {
         this.day = d;
         this.month = m;
         this.year = y;
+        this.onChange();
+    }
+
+    onChange() {
+        _IBESearch.setDateDeparture(this.day, this.month, this.year);
     }
     /**
      * Изменяет текущий месяц датапикера

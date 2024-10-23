@@ -116,6 +116,14 @@ class IBESearch {
         console.log(`region: ${id} ${name}`)
 
     }
+
+    setDateDeparture(d, m, y) {
+        const $dateDeparure = document.querySelector('.js-ibe-departure-date__val');
+        $dateDeparure.innerHTML = `${d}.${m}.${y}`;
+        document.querySelector('.js-ibe-departure-date__dropdown').classList.add('hide');
+        console.log('ddate', d, m, y)
+        console.log($dateDeparure)
+    }
     /**
      * Устанавливает значение формы для туристов
      * @param {*} 
