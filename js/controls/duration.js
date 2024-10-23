@@ -1,6 +1,6 @@
 const durationTpl = {
     durationsValues: [
-        { value: "-1", name: " Beliebig" },
+        { value: "", name: " Beliebig" },
         { value: "7", name: "1 Woche" },
         { value: "14", name: "2 Wochen" },
         { value: "21", name: "3 Wochen" },
@@ -35,13 +35,13 @@ const durationTpl = {
     </div>
     <div class="wizardLayer__group">
         <div class="wizardLayer__select">
-            <select name="durationSelect" id="durationSelect">
+            <select class="ibe-tourists__select js-ibe-duration-select">
                 ${durationOptions}
             </select>
         </div>
     </div>
     <div class="cmsDatePicker__buttonframe">
-        <button class="cmsDatePicker__button" id="btn4" onClick="return updateReturnDate(this);">Übernehmen</button>
+        <button class="cmsDatePicker__button" onClick="return updateReturnDate(this);">Übernehmen</button>
         <div class="clear"></div>
     </div>
     `,
@@ -54,17 +54,36 @@ class DurationControl {
     constructor(element, t) {
         this.element = element;
         this.$root = document.querySelector(element);
+        this.$select = null;
+        this.value = "";
         this.init();
     }
     init() {
         console.log('DurationControl start');
         this.renderControl();
+        //this.setValue(this.value);
+        this.eventListener();
+    }
+
+    eventListener() {
+        this.$select.addEventListener('change', e => {
+            this.setValue(e.target.value);
+        })
+    }
+    setValue(value) {
+        this.value = value;
+        this.$select.value = value;
+        this.onChange(value);
+    }
+    onChange() {
+        _IBESearch.setDuration(this.value);
     }
 
     renderControl() {
         const duration = '';
         const durationOptions = this.renderDurationOptions(duration)
         this.$root.innerHTML=  durationTpl.durations(durationOptions);
+        this.$select = this.$root.querySelector('.js-ibe-duration-select');
     }
 
     /**
