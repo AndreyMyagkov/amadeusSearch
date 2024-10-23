@@ -140,15 +140,24 @@
 .ibe__toggler-icon {
     flex: 0 0 20px;
 }
-.ibe__toggler-val {
+.ibe__toggler-val,
+.ibe__toggler-placeholder {
     flex: 1 1 calc(100% - 20px);
+    max-width: calc(100% - 20px);
     cursor: pointer;
     display: flex;
     align-items: center;
     color: var(--ibe-color-font-50);
 }
-.ibe-toggler-val_selected {
+.ibe__toggler-val {
     color: var(--ibe-color-font);
+    display: none;
+}
+.ibe__toggler-val:not(:empty) {
+    display: flex;
+}
+.ibe__toggler-val:not(:empty) + .ibe__toggler-placeholder {
+    display: none;
 }
 
 .ibe-dropdown {

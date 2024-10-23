@@ -158,9 +158,9 @@ class IBESearch {
 
         // TODO: i18n-placeholder i18n-value и тп
         this.$root.querySelectorAll("[i18n-placeholder]").forEach(_ => {
-            // const key = _.getAttribute('i18n-placeholder')
-            // const value = this.t[key] ?? '*';
-            // _.innerText = value;
+            const key = _.getAttribute('i18n-placeholder')
+            const value = this.t[key] ?? '*';
+            _.setAttribute('placeholder', value);
         })
 
     }
