@@ -10,22 +10,30 @@ const searchWizardDateTpl = {
     `,
     monthCurrent: (monthName, month, year) => `<div class="cmsDatePicker-months__current" data-month="${month}" data-year="${year}">${monthName} ${year}</div>`,
 
-    day: (day, month, year, passed) => `<div class="cmsDatePicker__day ${passed ? 'passed' : ''}"  data-day="${`${+day + 100}`.substring(1)}" data-month="${`${+month + 100}`.substring(1)}" data-year="${year}">
+    day: (day, month, year, passed, selected) => `<div class="cmsDatePicker__day ${passed ? 'passed' : ''} ${selected ? 'active' : ''}"  data-day="${`${+day + 100}`.substring(1)}" data-month="${`${+month + 100}`.substring(1)}" data-year="${year}">
         <span>${day}</span></div>
     `,
 
 
-    outer: (monthOptions, monthCurrent, days, type) => `
+    outer: (monthOptions, monthCurrent, days) => `
     <!-- calendarFrame -->
     <div class="cmsDatePicker__calframe">
         <!-- monthSelect -->
 		<div class="cmsDatePicker-months">
-			<button class="cmsDatePicker-months__prev js-ibe-calendar__month-prev" type="button"></button>
+			<button class="cmsDatePicker-months__prev js-ibe-calendar__month-prev" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="20">
+                <path d="M20.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l192-192c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L54.6 256 235.3 436.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-192-192z"/>
+            </svg>
+            </button>
 			${monthCurrent}
-			<button class="cmsDatePicker-months__next js-ibe-calendar__month-next" type="button"></button>
+			<button class="cmsDatePicker-months__next js-ibe-calendar__month-next" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="20">
+                    <path d="M299.3 244.7c6.2 6.2 6.2 16.4 0 22.6l-192 192c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L265.4 256 84.7 75.3c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l192 192z"/>
+                </svg>
+            </button>
 		</div>
         <div class="cmsDatePicker__monthSelect" style='display:none'>
-            <select class="monthSelect" id="${type == 1 ? 'depDropdown' : 'retDropdown'}" onchange="get${type == 1 ? 'Departure' : 'Return'}Datepicker(this, true);">
+            <select class="monthSelect">
                 ${monthOptions}
             </select>
         </div>
@@ -70,7 +78,7 @@ class CalendarControl {
     }
     
     init() {
-        this.renderDatepicker(1);
+        this.renderDatepicker();
         this.eventsListener();
     }
 
@@ -113,7 +121,7 @@ class CalendarControl {
     }
 
     onChange() {
-        _IBESearch.setDateDeparture(this.day, this.month, this.year);
+        _IBESearch.setDate(this.name, this.day, this.month, this.year);
     }
     /**
      * Изменяет текущий месяц датапикера
@@ -169,7 +177,7 @@ class CalendarControl {
      * @param duration {number} - выбранная продолжительность, либо -1, если не нужно выводить
      * @return html
      */
-    renderDatepicker(type, month, year) {
+    renderDatepicker(month, year) {
         if (!month || !year) {
             month = new Date().getMonth() + 1;
             year = new Date().getFullYear();
@@ -183,10 +191,8 @@ class CalendarControl {
         const monthCurrent = searchWizardDateTpl.monthCurrent(searchWizardDateTpl.monthNames[+month - 1], month, year);
 
         const days = this.renderDays(month, year);
-
- 
         
-        this.$root.innerHTML = searchWizardDateTpl.outer(monthOptions, monthCurrent, days, type)
+        this.$root.innerHTML = searchWizardDateTpl.outer(monthOptions, monthCurrent, days)
     }
 
     /**
@@ -232,13 +238,17 @@ class CalendarControl {
 
         // Предыдущий месяц
         for (let i = lastMonthDays - dayOfWeekFirst + 2; i <= lastMonthDays; i++) {
-            html += searchWizardDateTpl.day(i, lastMonthMonth + 1, lastMonthYear, true)
+            html += searchWizardDateTpl.day(i, lastMonthMonth + 1, lastMonthYear, true, false)
         }
 
         const maxDays = this.daysInMonth(month, year);
         // Текеущий месяц
+        let selected = false;
         for (let i = 1; i <= maxDays; i++) {
-            html += searchWizardDateTpl.day(i, month, year, false)
+            if (this.month == month && this.year == year && this.day == i) {
+                selected = true
+            }
+            html += searchWizardDateTpl.day(i, month, year, false, selected)
         }
 
 
@@ -251,7 +261,7 @@ class CalendarControl {
         const nextDaysCount = 7 - (dayOfWeekFirst - 1 + maxDays) % 7;
         if (nextDaysCount < 7) {
             for (let i = 1; i <= nextDaysCount; i++) {
-                html += searchWizardDateTpl.day(i, nextMonthMonth, nextMonthYear, true)
+                html += searchWizardDateTpl.day(i, nextMonthMonth, nextMonthYear, true, false)
             }
         }
         return html

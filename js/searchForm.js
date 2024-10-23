@@ -24,6 +24,19 @@ class IBESearch {
         this.t = this.i18n_ibe[this.currentLng];
 
         this.$root = document.querySelector('.ibe');
+
+        this.form = {
+            ibe: 'package',
+            rid: 0,
+            depap: '',
+            adult: 2,
+            child: 5,
+            ddate: '',
+            rdate: '',
+            dur: '',
+            taid: 'buchdeinereise',
+            colors: 'p-082e39,a-0cb6b1'
+        }
         this.init();
     }
 
@@ -98,8 +111,8 @@ class IBESearch {
     initControls() {
         this.destinationControl = new DestinationControl(this.t);
         this.aiportControl = new AirportControl('.js-ibe-departure-control', this.t);
-        this.destinationDate = new CalendarControl('.js-ibe-deparure-calendar', 'ddate', this.t);
-        this.arrivalDate = new CalendarControl('.js-ibe-arrival-calendar', 'rdate', this.t);
+        this.destinationDateControl = new CalendarControl('.js-ibe-deparure-calendar', 'ddate', this.t);
+        this.arrivalDateControl = new CalendarControl('.js-ibe-arrival-calendar', 'rdate', this.t);
         this.durationControl = new DurationControl('.js-ibe-duration-control', this.t);
     }
 
@@ -121,14 +134,37 @@ class IBESearch {
         console.log(`airports: ${value}`)
     }
 
+    setDate(name, d, m, y) {
+        if (name === 'ddate') {
+            this.setDateDeparture(d, m, y)
+        }
+        if (name === 'rdate') {
+            this.setDateArrival(d, m, y)
+        }
+    }
     setDateDeparture(d, m, y) {
+        console.log('ddate', d, m, y)
         const $dateDeparure = document.querySelector('.js-ibe-departure-date__val');
         $dateDeparure.innerHTML = `${d}.${m}.${y}`;
         document.querySelector('.js-ibe-departure-date__dropdown').classList.add('hide');
-        console.log('ddate', d, m, y)
-        console.log($dateDeparure)
+
+        this.form.ddate = `${y}.${m}.${d}`;
+        // if (!this.form.rdate || (this.form.rdate && this.form.rdate < this.form.ddate)) {
+        //     this.arrivalDateControl.setDay(d, m, y);
+        //     this.arrivalDateControl.renderDays(m, y)
+        //     document.querySelector('.js-ibe-arrival-date__dropdown').classList.remove('hide');
+        // }
     }
-    
+
+    setDateArrival(d, m, y) {
+        console.log('rdate', d, m, y)
+        const $dateArrival = document.querySelector('.js-ibe-arrival-date__val');
+        $dateArrival.innerHTML = `${d}.${m}.${y}`;
+        this.form.rdate = `${y}.${m}.${d}`;
+        //document.querySelector('.js-ibe-arrival-date__dropdown').classList.add('hide');
+        console.log('rdate', d, m, y)
+    }
+
     /**
      * Устанавливает значение формы для туристов
      * @param {*} 
