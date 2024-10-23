@@ -62,6 +62,16 @@ class IBESearch {
         this.togglerListener();
         this.btnCloseDropDownListener();
         this.btnSubmitListener();
+        this.clickOutside();
+    }
+
+    clickOutside(e) {
+        document.addEventListener('click', (e) => {
+            if (!(this.$root == e.target || this.$root.contains(e.target))) {
+                this.closeAllDropDown();
+            }
+        })
+        
     }
 
     tabListener() {
@@ -111,6 +121,12 @@ class IBESearch {
             _.addEventListener('click', () => {
                 _.closest('.js-ibe__control').querySelector('.js-ibe__dropdown').classList.add('hide')
             })
+        })
+    }
+
+    closeAllDropDown() {
+        document.querySelectorAll('.js-ibe__dropdown').forEach(_ => {
+            _.classList.add('hide')
         })
     }
 
