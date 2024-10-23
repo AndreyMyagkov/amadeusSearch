@@ -4,129 +4,129 @@ const airports = [
         groups: [
             {
                 name: "Ost",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Berlin Brandenburg",
-                        value: "BER"
+                        code: "BER"
                     },
                     {
                         name: "Dresden",
-                        value: "DRS"
+                        code: "DRS"
                     },
                     {
                         name: "Erfurt Weimar",
-                        value: "ERF"
+                        code: "ERF"
                     },
                     {
                         name: "Heringsdorf",
-                        value: "HDF"
+                        code: "HDF"
                     },
                     {
                         name: "Leipzig Halle",
-                        value: "LEJ"
+                        code: "LEJ"
                     }
                 ]
             },
             {
                 name: "West",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Dortmund",
-                        value: "DTM"
+                        code: "DTM"
                     },
                     {
                         name: "Düsseldorf",
-                        value: "DUS"
+                        code: "DUS"
                     },
                     {
                         name: "Frankfurt",
-                        value: "FRA"
+                        code: "FRA"
                     },
                     {
                         name: "Frankfurt Hahn",
-                        value: "HHN"
+                        code: "HHN"
                     },
                     {
                         name: "Kassel Calden",
-                        value: "KSF"
+                        code: "KSF"
                     },
                     {
                         name: "Köln Bonn",
-                        value: "CGN"
+                        code: "CGN"
                     },
                     {
                         name: "Münster Osnabrück",
-                        value: "FMO"
+                        code: "FMO"
                     },
                     {
                         name: "Niederrhein Weeze",
-                        value: "NRN"
+                        code: "NRN"
                     },
                     {
                         name: "Paderborn",
-                        value: "PAD"
+                        code: "PAD"
                     },
                     {
                         name: "Saarbrücken",
-                        value: "SCN"
+                        code: "SCN"
                     }
                 ]
             },
             {
                 name: "Nord",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Bremen",
-                        value: "BRE"
+                        code: "BRE"
                     },
                     {
                         name: "Hamburg",
-                        value: "HAM"
+                        code: "HAM"
                     },
                     {
                         name: "Hannover",
-                        value: "HAJ"
+                        code: "HAJ"
                     },
                     {
                         name: "Rostock Laage",
-                        value: "RLG"
+                        code: "RLG"
                     },
                     {
                         name: "Schwerin",
-                        value: "SZW"
+                        code: "SZW"
                     }
                 ]
             },
             {
                 name: "Süd",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Friedrichshafen",
-                        value: "FDH"
+                        code: "FDH"
                     },
                     {
                         name: "Karlsruhe",
-                        value: "FKB"
+                        code: "FKB"
                     },
                     {
                         name: "Memmingen",
-                        value: "FMM"
+                        code: "FMM"
                     },
                     {
                         name: "München",
-                        value: "MUC"
+                        code: "MUC"
                     },
                     {
                         name: "Nürnberg",
-                        value: "NUE"
+                        code: "NUE"
                     },
                     {
                         name: "Stuttgart",
-                        value: "STR"
+                        code: "STR"
                     }
                 ]
             }
@@ -138,19 +138,19 @@ const airports = [
         groups: [
             {
                 name: "alle",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Brüssel",
-                        value: "BRU"
+                        code: "BRU"
                     },
                     {
                         name: "Charleroi",
-                        value: "CRL"
+                        code: "CRL"
                     },
                     {
                         name: "Lüttich",
-                        value: "LGG"
+                        code: "LGG"
                     }
                 ]
             }
@@ -161,15 +161,15 @@ const airports = [
         groups: [
             {
                 name: "alle",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Strasbourg",
-                        value: "SXB"
+                        code: "SXB"
                     },
                     {
                         name: "Metz Nancy",
-                        value: "ETZ"
+                        code: "ETZ"
                     }
                 ]
             }
@@ -180,27 +180,27 @@ const airports = [
         groups: [
             {
                 name: "alle",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Amsterdam",
-                        value: "AMS"
+                        code: "AMS"
                     },
                     {
                         name: "Eindhoven",
-                        value: "EIN"
+                        code: "EIN"
                     },
                     {
                         name: "Enschede",
-                        value: "ENS"
+                        code: "ENS"
                     },
                     {
                         name: "Groningen",
-                        value: "GRQ"
+                        code: "GRQ"
                     },
                     {
                         name: "Maastricht",
-                        value: "MST"
+                        code: "MST"
                     }
                 ]
             }
@@ -211,27 +211,27 @@ const airports = [
         groups: [
             {
                 name: "alle",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Krakau",
-                        value: "KRK"
+                        code: "KRK"
                     },
                     {
                         name: "Warschau",
-                        value: "WAW"
+                        code: "WAW"
                     },
                     {
                         name: "Breslau",
-                        value: "WRO"
+                        code: "WRO"
                     },
                     {
                         name: "Posen",
-                        value: "POZ"
+                        code: "POZ"
                     },
                     {
                         name: "Stettin",
-                        value: "SZZ"
+                        code: "SZZ"
                     }
                 ]
             }
@@ -242,31 +242,31 @@ const airports = [
         groups: [
             {
                 name: "alle",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Basel EuroAirport",
-                        value: "BSL"
+                        code: "BSL"
                     },
                     {
                         name: "Basel-Mulhouse",
-                        value: "MLH"
+                        code: "MLH"
                     },
                     {
                         name: "Bern",
-                        value: "BRN"
+                        code: "BRN"
                     },
                     {
                         name: "Genf",
-                        value: "GVA"
+                        code: "GVA"
                     },
                     {
                         name: "Lugano",
-                        value: "LUG"
+                        code: "LUG"
                     },
                     {
                         name: "Zürich",
-                        value: "ZRH"
+                        code: "ZRH"
                     }
                 ]
             }
@@ -277,31 +277,31 @@ const airports = [
         groups: [
             {
                 name: "alle",
-                value: "_",
+                code: "_",
                 items: [
                     {
                         name: "Graz",
-                        value: "GRZ"
+                        code: "GRZ"
                     },
                     {
                         name: "Innsbruck",
-                        value: "INN"
+                        code: "INN"
                     },
                     {
                         name: "Klagenfurt",
-                        value: "KLU"
+                        code: "KLU"
                     },
                     {
                         name: "Linz",
-                        value: "LNZ"
+                        code: "LNZ"
                     },
                     {
                         name: "Salzburg",
-                        value: "SZG"
+                        code: "SZG"
                     },
                     {
                         name: "Wien",
-                        value: "VIE"
+                        code: "VIE"
                     }
                 ]
             }
@@ -331,7 +331,7 @@ class AirportControl {
             country.groups.forEach(group => {
                 let itemsHTML = '';
                 group.items.forEach(item => {
-                    itemsHTML += this.renderItem(item.name, item.value)
+                    itemsHTML += this.renderItem(item.name, item.code)
                 })
                 
                 groupHTML += this.renderGroup(group.name, itemsHTML)
@@ -374,7 +374,10 @@ class AirportControl {
         const value = [];
         const $AllitemsCh = this.$root.querySelectorAll('.js-ibe-airport__ch-item:checked');
         $AllitemsCh.forEach(_ => {
-            _.checked && value.push(_.value)
+            _.checked && value.push({
+                name: _.dataset.name,
+                code: _.value
+            })
         })
         return value
     }
@@ -406,11 +409,11 @@ class AirportControl {
         </div>
         `
     }
-    renderItem(name, value) {
+    renderItem(name, code) {
         return `
         <div class="ibe-airport__item">
             <label class="ibe-airport__label">
-                <input type="checkbox" value="${value}" class="ibe-airport__checkbox js-ibe-airport__ch-item"><span>${name}</span>
+                <input type="checkbox" value="${code}" class="ibe-airport__checkbox js-ibe-airport__ch-item" data-name="${name}"><span>${name}</span>
             </label>
         </div>
         `

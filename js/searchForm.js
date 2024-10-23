@@ -14,6 +14,11 @@ const i18n_ibe = {
 
         departure_placeholder: "Abflughafen",
         departure_drop_header: "Abflughafen",
+        departure_airports: "Flughäfen", //TODO: "Flughafen|Flughäfen"
+
+        tourist_adults: "Erw.", //TODO:
+        tourist_child_none: "keine Kinder",
+        tourist_child: "Kinder",
 
         departure_date_placeholder: "Anreise",
         departure_date_drop_header: "Früheste Hinreise",
@@ -41,7 +46,7 @@ class IBESearch {
             rid: 0,
             depap: '',
             adult: 2,
-            child: 5,
+            child: '',
             ddate: '',
             rdate: '',
             dur: '',
@@ -55,6 +60,7 @@ class IBESearch {
         this.renderTranslates();
         this.eventListeners();
         this.initControls();
+        this.setTourists({adult: this.form.adult, child: 0, ages: ''})
     }
 
     eventListeners() {
@@ -183,8 +189,9 @@ class IBESearch {
     setRegion({id, name}) {
         const $componentInput = document.querySelector('.ibe-destination__input');
         $componentInput.value = name;
-
         document.querySelector('.ibe-destination__dropdown').classList.add('hide');
+
+        this.form.rid = id
 
         console.log(`region: ${id} ${name}`)
 
@@ -197,7 +204,19 @@ class IBESearch {
 
     setAirports(value) {
         console.log(`airports: ${value}`)
-        document.querySelector('.js-ibe-departure__val').innerHTML = value;
+        let valueString = '';
+        if (!value.length) {
+
+        }
+        if (value.length === 1) {
+            valueString = value[0].name;
+        }
+        if (value.length > 1) {
+            valueString = `${value.length} ${this.t.departure_airports}`
+        }
+        document.querySelector('.js-ibe-departure__val').innerHTML = valueString;
+
+        this.form.depap = value.map(_ => _.code).toString()
     }
 
     setDate(name, d, m, y) {
@@ -237,8 +256,12 @@ class IBESearch {
      */
     setTourists(data) {
         console.log('torists: ', data)
-        document.querySelector('.js-ibe-tourist__val').innerHTML = `${data.adult} ${data.ages.toString()}`;
-        //TODO: // setPassengers
+        let valueString = `${data.adult} ${this.t.tourist_adults} / ${data.child ? data.child + this.t.tourist_child : this.t.tourist_child_none}`;
+        
+        document.querySelector('.js-ibe-tourist__val').innerHTML = valueString;
+
+        this.form.adult = data.adult;
+        this.form.child = data.ages.toString();
     }
     
 }
