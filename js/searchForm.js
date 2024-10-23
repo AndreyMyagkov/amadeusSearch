@@ -12,11 +12,13 @@ const i18n_ibe = {
         departure_date_drop_header: "Früheste Hinreise",
         arrival_date_placeholder: "Rückreise",
         arrival_date_drop_header: "Späteste Rückreise",
+
+        btn_submit: "Suchen",
     }
 }
 //TODO: Класс перевода i18n i18n-placeholder и тп. Даем root и поехали
 class IBESearch {
-    constructor(i18n_ibe, lng) {
+    constructor(i18n_ibe, lng, targetPage) {
        
 
         this.i18n_ibe = i18n_ibe;
@@ -24,6 +26,8 @@ class IBESearch {
         this.t = this.i18n_ibe[this.currentLng];
 
         this.$root = document.querySelector('.ibe');
+
+        this.targetPage = targetPage;
 
         this.form = {
             ibe: 'package',
@@ -49,6 +53,7 @@ class IBESearch {
     eventListeners() {
         this.togglerListener();
         this.btnCloseDropDownListener();
+        this.btnSubmitListener();
     }
 
     /**
@@ -85,6 +90,17 @@ class IBESearch {
         })
     }
 
+    btnSubmitListener() {
+        document.querySelector('.js-ibe-btn-submit').addEventListener('click', () => {
+            this.formSubmit();
+        })
+    }
+
+    formSubmit() {
+        const searchParam = new URLSearchParams(this.form).toString();
+        console.log('submit', searchParam)
+        document.location.href = this.targetPage + '?' + searchParam
+    }
 
     /**
      * Рендерит фразы UI на нужном языке. В нужном блоке прописать аттрибут i18n со значением ключа перевода
@@ -137,6 +153,7 @@ class IBESearch {
 
     setAirports(value) {
         console.log(`airports: ${value}`)
+        document.querySelector('.js-ibe-departure__val').innerHTML = value;
     }
 
     setDate(name, d, m, y) {
@@ -176,11 +193,11 @@ class IBESearch {
      */
     setTourists(data) {
         console.log('torists: ', data)
-
+        document.querySelector('.js-ibe-tourist__val').innerHTML = `${data.adult} ${data.ages.toString()}`;
         //TODO: // setPassengers
     }
     
 }
 
-const _IBESearch = new IBESearch(i18n_ibe, 'de');
+const _IBESearch = new IBESearch(i18n_ibe, 'de', '');
 

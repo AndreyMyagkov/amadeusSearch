@@ -7,9 +7,11 @@
     --ibe-bg-element-hover: #ffcae6;
 
     --ibe-color-primary: #CA0036;
+    --ibe-color-primary-90: hsl(344, 100%, 45%);
     --ibe-color-secondary: #006592;
 
     --ibe-btn-primary-color: var(--ibe-color-primary);
+    --ibe-btn-primary-color-hover: var(--ibe-color-primary-90);
     --ibe-btn-secondary-color: var(--ibe-color-secondary);
 }
 
@@ -61,6 +63,9 @@
 .ibe__col {
     flex: 1 1 100%;
     position: relative;
+}
+.ibe__col-auto {
+    flex: 0 0 auto !important;
 }
 
 @media (min-width: 1000px) {
@@ -311,7 +316,23 @@
     height: 30px;
 }
 
-
+.ibe-btn-submit {
+    min-width: 150px;
+    display: inline-block;
+    position: relative;
+    padding: 8px 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    border: 0;
+    color: #ffffff;
+    background-color: var(--ibe-btn-primary-color);
+}
+.ibe-btn-submit:hover {
+    background-color: var(--ibe-btn-primary-color-hover);
+}
 /******* TODO: */
 
 

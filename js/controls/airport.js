@@ -41,8 +41,8 @@ const airports = [
                         value: "DUS"
                     },
                     {
-                        name: "FRA",
-                        value: "Frankfurt"
+                        name: "Frankfurt",
+                        value: "FRA"
                     },
                     {
                         name: "Frankfurt Hahn",
