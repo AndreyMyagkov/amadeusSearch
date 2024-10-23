@@ -1,14 +1,21 @@
 .ibe {
+    --ibe-color-primary: #CA0036;
+    --ibe-color-primary-90: hsl(344, 100%, 45%);
+    --ibe-color-secondary: #006592;
+
+
     --ibe-color-font: hsl(0, 0%, 20%);
     --ibe-color-font-50: hsl(0, 0%, 50%);
+
+    --ibe-tab-bg: #80cff1;
+    --ibe-tab-bg-hover: #80cff1;
+    --ibe-tab-bg-active: var(--ibe-color-secondary);
 
     --ibe-form-bg: #E5F5FC;
     --ibe-control-min-height: 36px;
     --ibe-bg-element-hover: #ffcae6;
 
-    --ibe-color-primary: #CA0036;
-    --ibe-color-primary-90: hsl(344, 100%, 45%);
-    --ibe-color-secondary: #006592;
+    
 
     --ibe-btn-primary-color: var(--ibe-color-primary);
     --ibe-btn-primary-color-hover: var(--ibe-color-primary-90);
@@ -40,6 +47,7 @@
     display: block;
     height: 1em;
     color: currentColor;
+    fill: currentColor;
 }
 .ibe {
     color: var(--ibe-color-font);
@@ -73,6 +81,46 @@
         flex: 1 1;
 
     }
+}
+
+.ibe-tabs {
+    margin-bottom: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+.ibe-tabs__tab {
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 500;
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+    background-color: var(--ibe-tab-bg);
+    color:#fff;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+.ibe-tabs__tab:not(.active) {
+    cursor: pointer;
+}
+.ibe-tabs__tab:hover {
+    background-color: var(--ibe-tab-bg-hover);
+}
+.ibe-tabs__tab.active {
+    background-color: var(--ibe-tab-bg-active);
+}
+.ibe-tab svg {
+    flex: 0 0;
+}
+.ibe-tab span {
+    color: #fff;
+}
+@media (min-width: 1000px) {
+  .ibe-tabs__tab {
+        flex: 1 0;
+    }  
 }
 
 .ibe__toggler {

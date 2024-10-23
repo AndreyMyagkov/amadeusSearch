@@ -1,6 +1,13 @@
 
 const i18n_ibe = {
     de: {
+        tab_package: "Pauschal",
+        tab_hot: "Last Minute",
+        tab_hotel: "Hotel",
+        tab_avia: "Flug",
+        tab_visa: "Visum",
+        tab_cruise: "Kreuzfahrt",
+
         destination_placeholder: 'Reiseziel',
         destination_drop_header: 'Top Reiseziel',
         destination_no_result: 'No result', //
@@ -51,9 +58,26 @@ class IBESearch {
     }
 
     eventListeners() {
+        this.tabListener();
         this.togglerListener();
         this.btnCloseDropDownListener();
         this.btnSubmitListener();
+    }
+
+    tabListener() {
+        document.querySelectorAll('.js-ibe-tabs__tab').forEach(tab => {
+            tab.addEventListener('click', e => {
+                document.querySelectorAll('.js-ibe-tabs__tab').forEach(_ => _.classList.remove('active'))
+                tab.classList.add('active');
+                const ibe = tab.dataset.ibe;
+                this.form.ibe = ibe
+                if (ibe === 'hotel') {
+                    this.$root.querySelector('.js-ibe-departure').classList.add('hide')
+                } else {
+                    this.$root.querySelector('.js-ibe-departure').classList.remove('hide')
+                }
+            })
+        })
     }
 
     /**
@@ -97,9 +121,13 @@ class IBESearch {
     }
 
     formSubmit() {
-        const searchParam = new URLSearchParams(this.form).toString();
-        console.log('submit', searchParam)
-        document.location.href = this.targetPage + '?' + searchParam
+        const searchParam = new URLSearchParams(this.form);
+        if (this.form.ibe === 'hotel') {
+            searchParam.delete('depap')
+        }
+        
+        console.log('submit', searchParam.toString())
+        document.location.href = this.targetPage + '?' + searchParam.toString()
     }
 
     /**
