@@ -30,9 +30,7 @@ const durationTpl = {
     ],
     
     durations: (durationOptions) => `
-    <div class="wizardLayer__head cmsMarginTop10">
-        Reisedauer
-    </div>
+    <div class="ibe-tourists__label">Reisedauer</div>
     <div class="wizardLayer__group">
         <div class="wizardLayer__select">
             <select class="ibe-tourists__select js-ibe-duration-select">
@@ -40,9 +38,8 @@ const durationTpl = {
             </select>
         </div>
     </div>
-    <div class="cmsDatePicker__buttonframe">
+    <div class="cmsDatePicker__buttonframe hide">
         <button class="cmsDatePicker__button" onClick="return updateReturnDate(this);">Übernehmen</button>
-        <div class="clear"></div>
     </div>
     `,
 
