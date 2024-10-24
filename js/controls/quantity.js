@@ -52,7 +52,7 @@ class Quantity {
 
     setValue(val) {
         this.$input.value = val;
-        _ibeTourists.onTouristsChange(this.name);
+        _IBESearch.touristsControl.onTouristsChange(this.name);
     }
 
     getValue() {

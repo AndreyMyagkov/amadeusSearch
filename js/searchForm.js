@@ -177,6 +177,7 @@ class IBESearch {
     initControls() {
         this.destinationControl = new DestinationControl(this.t);
         this.aiportControl = new AirportControl('.js-ibe-departure-control', this.t);
+        this.touristsControl = new TouristsControl('.js-ibe-tourist-control', this.t);
         this.destinationDateControl = new CalendarControl('.js-ibe-deparure-calendar', 'ddate', this.t);
         this.arrivalDateControl = new CalendarControl('.js-ibe-arrival-calendar', 'rdate', this.t);
         this.durationControl = new DurationControl('.js-ibe-duration-control', this.t);

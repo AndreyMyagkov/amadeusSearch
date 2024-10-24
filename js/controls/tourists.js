@@ -3,15 +3,14 @@
  * Если выбраны дети - необходимо указать возраст каждого
  * 
  */
-class IBEControlTourists {
-    constructor(i18n) {
+class TouristsControl {
+    constructor(selector, i18n) {
         console.log('IBEControlTourists start');
 
         this.t = i18n;
-
+        this.$root = document.querySelector(selector);
         this.$adultCountField = document.querySelector('.js-ibe-adult');
         this.$childCountField = document.querySelector('.js-ibe-child');
-
         this.init();
 
     }
@@ -27,9 +26,27 @@ class IBEControlTourists {
 
     //TODO:
     renderComponent() {
-
+        this.renderAges();
     }
 
+    renderAges() {
+        console.log(this.$root)
+        this.$root.querySelectorAll('.js-ibe-tourists__age-select').forEach(_ => {
+            let optionsHTML = '';
+            for (let age = 1; age <= 17; age++) {
+                optionsHTML += this.renderAgeOption(age);
+            }
+            _.innerHTML = optionsHTML;
+        })
+    }
+
+    renderAgeOption(age) {
+        let ageText = age;
+        if (age === 1) {
+            ageText = '< 2';
+        }
+        return `<option value="${age}">${ageText}</option>`
+    }
     /**
      * Обработчик событий
      */
@@ -123,4 +140,3 @@ class IBEControlTourists {
     }
 }
 
-const _ibeTourists = new IBEControlTourists();

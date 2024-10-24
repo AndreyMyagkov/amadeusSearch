@@ -72,6 +72,10 @@
     flex: 1 1 100%;
     position: relative;
 }
+.ibe__col-4 {
+    flex: 1 0 auto;
+    /* max-width: calc(33.33333% - 20px); */
+}
 .ibe__col-auto {
     flex: 0 0 auto !important;
 }
