@@ -79,11 +79,22 @@
 .ibe__col-auto {
     flex: 0 0 auto !important;
 }
+@media (min-width: 640px) {
+    .ibe__col {
+        flex: 1 1 calc(50% - 10px);
 
-@media (min-width: 1000px) {
+    }
+}
+@media (min-width: 768px) {
+    .ibe__col {
+        flex: 1 1 calc(33.3333% - 20px);
+
+    }
+}
+
+@media (min-width: 1200px) {
     .ibe__col {
         flex: 1 1;
-
     }
 }
 
@@ -122,6 +133,16 @@
 .ibe-tab span {
     color: #fff;
 }
+@media (min-width: 500px) {
+  .ibe-tabs__tab {
+        flex: 1 1 calc(50% - 2px);
+    }  
+}
+@media (min-width: 768px) {
+  .ibe-tabs__tab {
+        flex: 1 1 calc(33.3333% - 4px);
+    }  
+}
 @media (min-width: 1000px) {
   .ibe-tabs__tab {
         flex: 1 0;
@@ -135,7 +156,7 @@
     gap: 5px;
     position: relative;
     background: white;
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid #999;
     padding: 8px 10px;
     min-height: var(--ibe-control-min-height);
 }
@@ -157,6 +178,9 @@
 .ibe__toggler-val {
     color: var(--ibe-color-font);
     display: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .ibe__toggler-val:not(:empty) {
     display: flex;
@@ -442,7 +466,7 @@
     line-height: 30px;
     text-align: center;
     font-size: 13px;
-    color: #85a8b5
+    color: var(--ibe-color-secondary);
 }
 
 .cmsDatePicker__month {
@@ -457,7 +481,7 @@
 }
 .cmsDatePicker__dayFrame {
     display: grid;
-    grid-template-columns: repeat(7, 30px);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(auto, 30px);
 }
 
@@ -467,12 +491,12 @@
     height: 30px; */
     position: relative;
     text-align: center;
-
-
     cursor: pointer;
-    border-bottom: 1px solid #fff;
-    border-radius: 50%;
-    background: #fff
+    /* border-bottom: 1px solid #fff; */
+    /* background: #fff */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cmsDatePicker__day span {
@@ -480,41 +504,30 @@
     justify-content: center;
     align-items: center;
     height: 30px;
-    width: 100%;
-    font-size: 13px
+    width: 30px;
+    margin: 0 auto;
+    font-size: 13px;
+    border-radius: 50%;
 }
 
 .cmsDatePicker__day.passed span {
-    color: #f2f2f2;
     cursor: not-allowed;
+    color: #ddd;
     background: #fff
 }
 
 .cmsDatePicker__day.passed:hover span {
-    color: #f2f2f2;
     cursor: not-allowed;
+    color: #ddd;
     background: #fff
 }
 
-.cmsDatePicker__day:hover {
-    background: #ffcae6;
+.cmsDatePicker__day:hover  span{
     background: var(--ibe-bg-element-hover);
 }
 
-.cmsDatePicker__day.active {
+.cmsDatePicker__day.active  span{
     background: var(--ibe-color-primary);
     color: #ffffff
 }
 
-.cmsDatePicker__day.isActiveStart {
-    background: #e3007b;
-    color: #ffffff
-}
-
-.cmsDatePicker__day.isActiveEnd {
-    background: var(--base);
-    color: #ffffff
-}
-.clear {
-    clear: both;
-}
