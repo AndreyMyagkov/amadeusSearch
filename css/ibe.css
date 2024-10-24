@@ -456,14 +456,15 @@
     display: none
 }
 .cmsDatePicker__dayFrame {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 30px);
+    grid-template-rows: repeat(auto, 30px);
 }
 
 
 .cmsDatePicker__day {
-    flex: 1 0 14.28571428571429%;
-    height: 30px;
+    /* flex: 1 0 14.28571428571429%;
+    height: 30px; */
     position: relative;
     text-align: center;
 
@@ -478,7 +479,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 30px;
+    width: 100%;
     font-size: 13px
 }
 
