@@ -231,10 +231,12 @@ class IBESearch {
     setDateDeparture(d, m, y) {
         console.log('ddate', d, m, y)
         const $dateDeparure = document.querySelector('.js-ibe-departure-date__val');
-        $dateDeparure.innerHTML = `${d}.${m}.${y}`;
+        $dateDeparure.innerHTML = this.dateToFormat(d, m, y, 'dd.mm.yyyy');
+
         document.querySelector('.js-ibe-departure-date__dropdown').classList.add('hide');
 
-        this.form.ddate = `${y}.${m}.${d}`;
+        this.form.ddate = this.dateToFormat(d, m, y, 'yyyy-mm-dd');
+
         if (!this.form.rdate || (this.form.rdate && this.form.rdate < this.form.ddate)) {
             const [sd, sm, sy] = this.destinationDateControl.getSelectedDate();
             console.log('sd', sd, sm, sy)
@@ -248,10 +250,31 @@ class IBESearch {
     setDateArrival(d, m, y) {
         console.log('rdate', d, m, y)
         const $dateArrival = document.querySelector('.js-ibe-arrival-date__val');
-        $dateArrival.innerHTML = `${d}.${m}.${y}`;
-        this.form.rdate = `${y}.${m}.${d}`;
+        $dateArrival.innerHTML = this.dateToFormat(d, m, y, 'dd.mm.yyyy');
+
+        this.form.rdate = this.dateToFormat(d, m, y, 'yyyy-mm-dd');
         //document.querySelector('.js-ibe-arrival-date__dropdown').classList.add('hide');
         console.log('rdate', d, m, y)
+    }
+
+    dateToFormat(d, m, y, format) {
+        d = new String(d).padStart(2, '0');
+        m = new String(m).padStart(2, '0');
+        let result = '';
+        switch (format) {
+            case 'yyyy-mm-dd':
+                result = `${y}-${m}-${d}`
+                break;
+
+            case 'dd.mm.yyyy':
+                result = `${d}.${m}.${y}`
+                break;
+        
+            default:
+                result = `${d}.${m}.${y}`
+                break;
+        }
+        return result
     }
 
     /**

@@ -148,7 +148,7 @@ class CalendarControl {
     }
 
     onChange() {
-        _IBESearch.setDate(this.name, this.selectedDay, new String(+this.selectedMonth + 1).padStart(2, '0'), this.selectedYear);
+        _IBESearch.setDate(this.name, this.selectedDay, +this.selectedMonth + 1, this.selectedYear);
     }
     /**
      * Изменяет текущий месяц датапикера
