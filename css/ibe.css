@@ -199,6 +199,7 @@
     box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
     padding: 5px 16px 10px 16px;
     z-index: 3001;
+    border-radius: 0 0 5px 5px;
 }
 
 
@@ -207,18 +208,26 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    margin-bottom: 5px;
 }
 .ibe-dropdown-header {
     flex: 1 1 calc(100% - 20px);
     font-weight: 500;
 }
 .ibe__btn-close {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    position: relative;
+    left: 10px;
+}
+.ibe__btn-close:hover {
+    background-color: #eee;;
 }
 
 .ibe-dropdown__content { 
@@ -313,6 +322,7 @@
 
 .ibe-airport__list {
     padding-left: 0.6em;
+    margin-bottom: 10px;
 }
 .ibe-airport__item {
     margin-bottom: 5px;
@@ -370,22 +380,27 @@
 
 .ibe-quantity__minus,
 .ibe-quantity__plus {
-    background: var(--ibe-btn-secondary-color);
-    border: none;
-    height: 30px;
-    text-align: center;
-    color: #fff;
-    font-size: 24px;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.ibe-quantity__input {
     background: #f5f5f5;
     border: none;
     height: 30px;
     text-align: center;
+    font-size: 24px;
     font-weight: 500;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.ibe-quantity__minus:hover,
+.ibe-quantity__plus:hover {
+    background-color: #eee;
+}
+.ibe-quantity__input {
+    background: #fff;
+    border: none;
+    height: 30px;
+    text-align: center;
+    font-weight: 500;
+    max-width: 200px;
 }
 
 .ibe-tourists__select,
@@ -451,7 +466,10 @@
     justify-content: center;
     border-radius: 50%;
 }
-
+.cmsDatePicker-months__prev:hover,
+.cmsDatePicker-months__next:hover {
+    background-color: #eee;
+}
 
 
 .cmsDatePicker__monthhead {
