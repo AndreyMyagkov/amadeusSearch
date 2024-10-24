@@ -14,7 +14,6 @@ const searchWizardDateTpl = {
         <span>${day}</span></div>
     `,
 
-
     outer: (monthCurrent, days) => `
     <!-- calendarFrame -->
     <div class="cmsDatePicker__calframe">
@@ -53,7 +52,6 @@ const searchWizardDateTpl = {
   
     </div>
     `
-
 
 }
 class CalendarControl {
@@ -123,11 +121,30 @@ class CalendarControl {
         
     }
 
+    setMinDate(d, m, y) {
+        // this.day = d;
+        // this.month = null;
+        // this.year = null;
+        [this.day, this.month, this.year] = [+d, +m, +y];
+
+       // if (`${this.selectedYear}${this.selectedMonth}${this.selectedDay}` < `${y}${m}${d}`) {
+            [this.selectedDay, this.selectedMonth, this.selectedYear] = [+d, +m, +y];
+
+        //}
+
+        this.renderDatepicker(+m, +y);
+        this.onChange();
+    }
+
     setDay(d, m, y) {
         this.selectedDay = d;
         this.selectedMonth = m;
         this.selectedYear = y;
         this.onChange();
+    }
+
+    getSelectedDate() {
+        return [this.selectedDay, this.selectedMonth, this.selectedYear]
     }
 
     onChange() {
@@ -139,33 +156,12 @@ class CalendarControl {
      * @returns 
      */
     datepickerMonthChange(diff) {
-        const currentEl = this.$root.querySelector('.cmsDatePicker-months__current');
-        //const currentMonth = +currentEl.getAttribute('data-month');
-        //const currentYear = +currentEl.getAttribute('data-year');
 
-        // const now = new Date();
-        // const nowYear = now.getFullYear();
-        // const nowMonth = now.getUTCMonth() + 1;
-        // console.log('было ', currentMonth, currentYear)
-        // console.log('стало ', nowMonth, nowYear)
-        // console.log('this', this.day, this.month, this.year)
-        //console.log(diff, currentYear, nowYear, currentMonth, nowMonth)
-
-        //const NOW_MONTH_INDEX = getMonthIndex(nowMonth,nowYear);
-
-        // Нельзя выбрать меньший месяц, чем сейчас
-        // if (diff === -1 && currentYear === nowYear && currentMonth <= nowMonth) {
-        //     return
-        // }
         if (diff === -1) {
             if (this.year === this.nowYear && this.month <= this.nowMonth) {
                 return
             }
         }
-        // Максимальный месяц через год
-        // if (diff === 1 && currentYear === nowYear + 1 && currentMonth >= nowMonth - 1) {
-        //     return
-        // }
 
         // Нельзя выбрать дату > + 1 год
         if (diff === 1) {
@@ -186,27 +182,6 @@ class CalendarControl {
     }
 
     /**
-     * Порядковый индекс месяца с нулевого года
-     * @param {*} y 
-     * @param {*} m 
-     */
-    getMonthIndex(m, y) {
-        return y * 12 + m;
-    }
-
-    /**
-     * Год и месяц по его порядковому номеру
-     * @param {*} index 
-     * @returns Порядковый номер месяца с нуля! 
-     */
-    getMonthAndYearFromMonthIndex(index) {
-        return {
-            year: Math.floor(index / 12),
-            month: index % 12
-        }
-    }
-
-    /**
      * Рендерит html датапикера
      * @param type {number} - тип: с - по
      * @param month {number} - месяц, год в формате 72021
@@ -214,15 +189,9 @@ class CalendarControl {
      * @return html
      */
     renderDatepicker(month, year) {
-        // if (!month || !year) {
-        //     month = new Date().getMonth() + 1;
-        //     year = new Date().getFullYear();
-        // }
         this.month = month;
         this.year = year;
         console.log('renderDatepicker', month, year);
-        // this.month = month;
-        // this.year = year;
 
         const monthCurrent = searchWizardDateTpl.monthCurrent(searchWizardDateTpl.monthNames[+month], month, year);
 
@@ -259,7 +228,7 @@ class CalendarControl {
         }
 
         const maxDays = this.daysInMonth(month, year);
-        // Текеущий месяц
+        // Текущий месяц
         for (let i = 1; i <= maxDays; i++) {
             let selected = false;
             let passed = false;

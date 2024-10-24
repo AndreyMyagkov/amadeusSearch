@@ -222,7 +222,7 @@ class IBESearch {
 
     setDate(name, d, m, y) {
         if (name === 'ddate') {
-            this.setDateDeparture(d, m, y)
+            this.setDateDeparture(d, m, y);
         }
         if (name === 'rdate') {
             this.setDateArrival(d, m, y)
@@ -235,11 +235,14 @@ class IBESearch {
         document.querySelector('.js-ibe-departure-date__dropdown').classList.add('hide');
 
         this.form.ddate = `${y}.${m}.${d}`;
-        // if (!this.form.rdate || (this.form.rdate && this.form.rdate < this.form.ddate)) {
-        //     this.arrivalDateControl.setDay(d, m, y);
-        //     this.arrivalDateControl.renderDays(m, y)
-        //     document.querySelector('.js-ibe-arrival-date__dropdown').classList.remove('hide');
-        // }
+        if (!this.form.rdate || (this.form.rdate && this.form.rdate < this.form.ddate)) {
+            const [sd, sm, sy] = this.destinationDateControl.getSelectedDate();
+            console.log('sd', sd, sm, sy)
+            this.arrivalDateControl.setMinDate(sd, sm, sy);
+            // this.arrivalDateControl.setDay(d, m, y);
+            // this.arrivalDateControl.renderDays(m, y)
+            document.querySelector('.js-ibe-arrival-date__dropdown').classList.remove('hide');
+        }
     }
 
     setDateArrival(d, m, y) {
