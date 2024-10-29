@@ -108,7 +108,7 @@
             <!-- tourists-->
             <div class="ibe__col js-ibe__control">
                 <div class="ibe__toggler js-ibe__toggler">
-                    <div class="ibe__toggler-val js-ibe-tourist__val">Erw. / keine Kinder</div>
+                    <div class="ibe__toggler-val js-ibe-tourist__val"></div>
                     
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" height="20" class="ibe__toggler-icon">
                         <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192l42.7 0c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0L21.3 320C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7l42.7 0C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3l-213.3 0zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352l117.3 0C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7l-330.7 0c-14.7 0-26.7-11.9-26.7-26.7z" />
@@ -116,7 +116,7 @@
                 </div>
                 <div class="ibe-dropdown js-ibe__dropdown hide">
                     <div class="ibe-dropdown__top">
-                        <div class="ibe-dropdown-header">Reisende</div>
+                        <div class="ibe-dropdown-header" i18n="tourist_drop_header"></div>
                         <div class="ibe__btn-close js-ibe__close-dropdown">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" height="20" class="ibe__close-icon">
                                 <path d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.6 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z" />
@@ -126,7 +126,7 @@
                     <div class="ibe-dropdown__main js-ibe-tourist-control">
 
                         <div class="ibe-tourists__row">
-                            <div class="ibe-tourists__label">Erwachsene</div>
+                            <div class="ibe-tourists__label" i18n="tourist_drop_adult"></div>
                             <div class="ibe-tourists__quantity ibe-quantity js-ibe-adult-quantity">
                                 <button class="ibe-quantity__minus js-ibe-quantity__minus" type="button">–</button>
                                 <input type="text" name="adult" class="ibe-quantity__input js-ibe-quantity__input js-ibe-adult" min="1" max="4" value="2" readonly>
@@ -135,7 +135,7 @@
                         </div>
 
                         <div class="ibe-tourists__row">
-                            <div class="ibe-tourists__label">Kinder</div>
+                            <div class="ibe-tourists__label" i18n="tourist_drop_child"></div>
                             <div class="ibe-tourists__quantity ibe-quantity js-ibe-child-quantity">
                                 <button class="ibe-quantity__minus js-ibe-quantity__minus" type="button">–</button>
                                 <input type="text" name="child" class="ibe-quantity__input js-ibe-quantity__input js-ibe-child" min="0" max="3" value="0" readonly>
@@ -145,12 +145,12 @@
 
                         <!-- ages -->
                         <div class="ibe-tourists__row js-ibe-childs-ages hide">
-                            <div class="ibe-dropdown-header">Alter der Kinder</div>
+                            <div class="ibe-dropdown-header" i18n="tourist_drop_child_age_header"></div>
 
                             <div class="ibe__row">
                                 <div class="ibe__col-4 js-ibe-child-age hide">
                                     <div class="ibe-tourists__row">
-                                        <div class="ibe-tourists__label">Kind 1</div>
+                                        <div class="ibe-tourists__label"><span i18n="tourist_drop_child_header"></span> 1</div>
                                         <div class="ibe-tourists__select-wr">
                                             <select class="ibe-tourists__select js-ibe-tourists__age-select">
                                             </select>
@@ -160,7 +160,7 @@
 
                                 <div class="ibe__col-4 js-ibe-child-age hide">
                                     <div class="ibe-tourists__row">
-                                        <div class="ibe-tourists__label">Kind 2</div>
+                                        <div class="ibe-tourists__label"><span i18n="tourist_drop_child_header"></span> 2</div>
                                         <div class="ibe-tourists__select-wr">
                                             <select class="ibe-tourists__select js-ibe-tourists__age-select">
                                             </select>
@@ -170,7 +170,7 @@
 
                                 <div class="ibe__col-4 js-ibe-child-age hide">
                                     <div class="ibe-tourists__row">
-                                        <div class="ibe-tourists__label">Kind 3</div>
+                                        <div class="ibe-tourists__label"><span i18n="tourist_drop_child_header"></span> 3</div>
                                         <div class="ibe-tourists__select-wr">
                                             <select class="ibe-tourists__select js-ibe-tourists__age-select">
                                             </select>
@@ -231,7 +231,41 @@
                     </div>
                     <div class="ibe-dropdown__content ibe-arrival-date__content">
                         <div class="js-ibe-arrival-calendar"></div>
-                        <div class="ibe-duration-control js-ibe-duration-control"></div>
+                        <div class="ibe-duration-control js-ibe-duration-control">
+                            <div class="ibe-tourists__label" i18n="duration_drop_header"></div>
+                            <div class="wizardLayer__group">
+                                <div class="wizardLayer__select">
+                                    <select class="ibe-tourists__select js-ibe-duration-select">
+                                        <option value="" selected="" i18n="duration_any"></option>
+                                        <option value="7" i18ntc="week">1</option>
+                                        <option value="14" i18ntc="week">2</option>
+                                        <option value="21" i18ntc="week">3</option>
+                                        <option value="28" i18ntc="week">4</option>
+                                        <option value="1" i18ntc="day">1</option>
+                                        <option value="2" i18ntc="day">2</option>
+                                        <option value="3" i18ntc="day">3</option>
+                                        <option value="4" i18ntc="day">4</option>
+                                        <option value="5" i18ntc="day">5</option>
+                                        <option value="6" i18ntc="day">6</option>
+                                        <option value="7" i18ntc="day">7</option>
+                                        <option value="8" i18ntc="day">8</option>
+                                        <option value="9" i18ntc="day">9</option>
+                                        <option value="10" i18ntc="day">10</option>
+                                        <option value="11" i18ntc="day">11</option>
+                                        <option value="12" i18ntc="day">12</option>
+                                        <option value="13" i18ntc="day">13</option>
+                                        <option value="14" i18ntc="day">14</option>
+                                        <option value="15" i18ntc="day">15</option>
+                                        <option value="16" i18ntc="day">16</option>
+                                        <option value="17" i18ntc="day">17</option>
+                                        <option value="18" i18ntc="day">18</option>
+                                        <option value="19" i18ntc="day">19</option>
+                                        <option value="20" i18ntc="day">20</option>
+                                        <option value="21" i18ntc="day">21</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

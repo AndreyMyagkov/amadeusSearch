@@ -10,25 +10,76 @@ const i18n_ibe = {
 
         destination_placeholder: 'Reiseziel',
         destination_drop_header: 'Top Reiseziel',
-        destination_no_result: 'No result', //
+        destination_no_result: 'No result',
 
         departure_placeholder: "Abflughafen",
         departure_drop_header: "Abflughafen",
-        departure_airports: "Flughäfen", //TODO: "Flughafen|Flughäfen"
+        departure_airports: "Flughafen|Flughäfen",
 
         tourist_adults: "Erw.", //TODO:
         tourist_child_none: "keine Kinder",
         tourist_child: "Kinder",
+        tourist_drop_header: "Reisende",
+        tourist_drop_adult: "Erwachsene",
+        tourist_drop_child: "Kinder",
+        tourist_drop_child_age_header: "Alter der Kinder",
+        tourist_drop_child_header: "Kind",
 
         departure_date_placeholder: "Anreise",
         departure_date_drop_header: "Früheste Hinreise",
         arrival_date_placeholder: "Rückreise",
         arrival_date_drop_header: "Späteste Rückreise",
 
+        duration_drop_header: "Reisedauer",
+        duration_any: "Beliebig", 
         btn_submit: "Suchen",
+        week: "Woche|Wochen",
+        day: "Tag|Tage",
+        month: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+
+        days_of_week: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+    },
+    ru: {
+        tab_package: "Туры",
+        tab_hot: "Горящие туры",
+        tab_hotel: "Отели",
+        tab_avia: "Авиа",
+        tab_visa: "Визы",
+        tab_cruise: "Круизы",
+
+        destination_placeholder: 'Куда',
+        destination_drop_header: 'Популярное',
+        destination_no_result: 'Не найдено',
+
+        departure_placeholder: "Вылет из",
+        departure_drop_header: "Вылет из",
+        departure_airports: "Аэропорт|Аэропорта|Аэропортов",
+
+        tourist_adults: "взр.",
+        tourist_child_none: "без детей",
+        tourist_child: "реб.",
+        tourist_drop_header: "Туристы",
+        tourist_drop_adult: "Взрослых",
+        tourist_drop_child: "Детей",
+        tourist_drop_child_age_header: "Возраст детей",
+        tourist_drop_child_header: "Ребенок",
+
+        departure_date_placeholder: "Туда",
+        departure_date_drop_header: "Дата туда",
+        arrival_date_placeholder: "Обратно",
+        arrival_date_drop_header: "Дата обратно",
+
+        duration_drop_header: "Длительность",
+        duration_any: "Любая",
+        btn_submit: "Поиск",
+        week: "Неделя|Недели|Недель",
+        day: "День|Дня|Дней",
+        month: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+
+        days_of_week: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
     }
 }
-//TODO: Класс перевода i18n i18n-placeholder и тп. Даем root и поехали
+
 class IBESearch {
     constructor(i18n_ibe, lng, targetPage) {
        
@@ -169,6 +220,32 @@ class IBESearch {
             _.setAttribute('placeholder', value);
         })
 
+        // i18ntc - со склонением числительных
+        this.$root.querySelectorAll("[i18ntc]").forEach(_ => {
+            const key = _.getAttribute('i18ntc')
+            const n = +_.innerText.trim();
+            console.log(n, key)
+            const value = this.tc(n, this.t[key]);
+            _.innerText = `${n} ${value}`;
+        })
+    }
+
+    /**
+     * Склонение числительных
+     * @param {*} n 
+     * @param {*} phrases 
+     * @returns 
+     */
+    tc(n, phrases) {
+        n = +n;
+        phrases = phrases.split('|');
+     
+        const cases = {
+            'ru': (n) => (n % 10 === 1 && n % 100 !== 11) ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2,
+            'de': (n) => (n === 1 ? 0 : 1),
+            'en': (n) => (n === 1 ? 0 : 1),
+        }
+        return phrases[cases[this.currentLng](n)]
     }
 
     /**
@@ -180,7 +257,7 @@ class IBESearch {
         this.touristsControl = new TouristsControl('.js-ibe-tourist-control', this.t);
         this.destinationDateControl = new CalendarControl('.js-ibe-deparure-calendar', 'ddate', this.t);
         this.arrivalDateControl = new CalendarControl('.js-ibe-arrival-calendar', 'rdate', this.t);
-        this.durationControl = new DurationControl('.js-ibe-duration-control', this.t);
+        this.durationControl = new DurationControl('.js-ibe-duration-control', this.t[this.currentLng]);
     }
 
     /**
@@ -213,7 +290,7 @@ class IBESearch {
             valueString = value[0].name;
         }
         if (value.length > 1) {
-            valueString = `${value.length} ${this.t.departure_airports}`
+            valueString = this.tc(value.length, this.t.departure_airports)
         }
         document.querySelector('.js-ibe-departure__val').innerHTML = valueString;
 
@@ -283,7 +360,7 @@ class IBESearch {
      */
     setTourists(data) {
         console.log('torists: ', data)
-        let valueString = `${data.adult} ${this.t.tourist_adults} / ${data.child ? data.child + this.t.tourist_child : this.t.tourist_child_none}`;
+        let valueString = `${data.adult} ${this.t.tourist_adults} / ${data.child ? data.child + ' ' + this.t.tourist_child : this.t.tourist_child_none}`;
         
         document.querySelector('.js-ibe-tourist__val').innerHTML = valueString;
 
@@ -293,5 +370,5 @@ class IBESearch {
     
 }
 
-const _IBESearch = new IBESearch(i18n_ibe, 'de', '');
+const _IBESearch = new IBESearch(i18n_ibe, 'ru', '');
 

@@ -4,17 +4,15 @@
  * 
  */
 const searchWizardDateTpl = {
-    monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-    
-    /*monthOptions: (monthName, month, year) => `<option value="${month}${year}">${monthName} ${year}</option>
-    `,*/
     monthCurrent: (monthName, month, year) => `<div class="cmsDatePicker-months__current" data-month="${month}" data-year="${year}">${monthName} ${year}</div>`,
 
     day: (day, month, year, passed, selected) => `<div class="cmsDatePicker__day ${passed ? 'passed' : ''} ${selected ? 'active' : ''}"  data-day="${`${+day + 100}`.substring(1)}" data-month="${`${+month + 100}`.substring(1)}" data-year="${year}">
         <span>${day}</span></div>
     `,
 
-    outer: (monthCurrent, days) => `
+    dayOfWeek: (name) => `<div class="cmsDatePicker__monthday">${name}</div>`,
+
+    outer: (monthCurrent, daysOfWeek, days) => `
     <!-- calendarFrame -->
     <div class="cmsDatePicker__calframe">
         <!-- monthSelect -->
@@ -34,13 +32,7 @@ const searchWizardDateTpl = {
        
         <!-- Month Head -->
         <div class="cmsDatePicker__monthhead">
-            <div class="cmsDatePicker__monthday">Mo</div>
-            <div class="cmsDatePicker__monthday">Di</div>
-            <div class="cmsDatePicker__monthday">Mi</div>
-            <div class="cmsDatePicker__monthday">Do</div>
-            <div class="cmsDatePicker__monthday">Fr</div>
-            <div class="cmsDatePicker__monthday">Sa</div>
-            <div class="cmsDatePicker__monthday">So</div>
+            ${daysOfWeek}
         </div>
         <!-- Month Days -->
         <div class="cmsDatePicker__month">
@@ -193,13 +185,24 @@ class CalendarControl {
         this.year = year;
         console.log('renderDatepicker', month, year);
 
-        const monthCurrent = searchWizardDateTpl.monthCurrent(searchWizardDateTpl.monthNames[+month], month, year);
+        const monthCurrent = searchWizardDateTpl.monthCurrent(this.t.month[+month], month, year);
 
+        const daysOfWeek = this.renderDaysOfWeek();
         const days = this.renderDays(month, year);
         
-        this.$root.innerHTML = searchWizardDateTpl.outer(monthCurrent, days)
+        this.$root.innerHTML = searchWizardDateTpl.outer(monthCurrent, daysOfWeek, days)
     }
 
+    /**
+     * Рендерит дни недели
+     */
+    renderDaysOfWeek() {
+        let html = '';
+        for(let i = 0; i < 7; i++) {
+            html += searchWizardDateTpl.dayOfWeek(this.t.days_of_week[i])
+        }
+        return html
+    }
 
     /**
      * Рендерит дни календаря
