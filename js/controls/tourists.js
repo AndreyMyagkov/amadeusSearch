@@ -5,8 +5,6 @@
  */
 class TouristsControl {
     constructor(selector, i18n) {
-        console.log('IBEControlTourists start');
-
         this.t = i18n;
         this.$root = document.querySelector(selector);
         this.$adultCountField = document.querySelector('.js-ibe-adult');
@@ -24,7 +22,6 @@ class TouristsControl {
 
     }
 
-    //TODO:
     renderComponent() {
         this.renderAges();
     }

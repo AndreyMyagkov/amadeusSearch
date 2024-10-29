@@ -1,51 +1,7 @@
 /**
  * Класс отрисовки календаря: слайдер месяцев, календарь
- * 1. рендер контрола месяца со стартового месяца и года, если не дали, то текущие
  * 
  */
-const searchWizardDateTpl = {
-    monthCurrent: (monthName, month, year) => `<div class="cmsDatePicker-months__current" data-month="${month}" data-year="${year}">${monthName} ${year}</div>`,
-
-    day: (day, month, year, passed, selected) => `<div class="cmsDatePicker__day ${passed ? 'passed' : ''} ${selected ? 'active' : ''}"  data-day="${`${+day + 100}`.substring(1)}" data-month="${`${+month + 100}`.substring(1)}" data-year="${year}">
-        <span>${day}</span></div>
-    `,
-
-    dayOfWeek: (name) => `<div class="cmsDatePicker__monthday">${name}</div>`,
-
-    outer: (monthCurrent, daysOfWeek, days) => `
-    <!-- calendarFrame -->
-    <div class="cmsDatePicker__calframe">
-        <!-- monthSelect -->
-		<div class="cmsDatePicker-months">
-			<button class="cmsDatePicker-months__prev js-ibe-calendar__month-prev" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="20">
-                <path d="M20.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l192-192c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L54.6 256 235.3 436.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-192-192z"/>
-            </svg>
-            </button>
-			${monthCurrent}
-			<button class="cmsDatePicker-months__next js-ibe-calendar__month-next" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="20">
-                    <path d="M299.3 244.7c6.2 6.2 6.2 16.4 0 22.6l-192 192c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L265.4 256 84.7 75.3c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l192 192z"/>
-                </svg>
-            </button>
-		</div>
-       
-        <!-- Month Head -->
-        <div class="cmsDatePicker__monthhead">
-            ${daysOfWeek}
-        </div>
-        <!-- Month Days -->
-        <div class="cmsDatePicker__month">
-            <div class="cmsDatePicker__dayFrame">
-                ${days}
-            </div>
-            <!-- Month Days -->
-        </div>
-  
-    </div>
-    `
-
-}
 class CalendarControl {
     constructor(selector, name, i18n) {
         console.log('IBEControlCalendar start', name);
@@ -68,6 +24,49 @@ class CalendarControl {
         this.selectedDay = null;
         this.selectedMonth = null;
         this.selectedYear = null;
+
+        this.tpl = {
+            monthCurrent: (monthName, month, year) => `
+            <div class="cmsDatePicker-months__current" data-month="${month}" data-year="${year}">${monthName} ${year}</div>`,
+
+            day: (day, month, year, passed, selected) => `
+            <div class="cmsDatePicker__day ${passed ? 'passed' : ''} ${selected ? 'active' : ''}"  data-day="${`${+day + 100}`.substring(1)}" data-month="${`${+month + 100}`.substring(1)}" data-year="${year}">
+            <span>${day}</span></div>`,
+
+            dayOfWeek: (name) => `<div class="cmsDatePicker__monthday">${name}</div>`,
+
+            outer: (monthCurrent, daysOfWeek, days) => `
+                <!-- calendarFrame -->
+                <div class="cmsDatePicker__calframe">
+                    <!-- monthSelect -->
+                    <div class="cmsDatePicker-months">
+                        <button class="cmsDatePicker-months__prev js-ibe-calendar__month-prev" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="20">
+                            <path d="M20.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l192-192c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L54.6 256 235.3 436.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-192-192z"/>
+                        </svg>
+                        </button>
+                        ${monthCurrent}
+                        <button class="cmsDatePicker-months__next js-ibe-calendar__month-next" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="20">
+                                <path d="M299.3 244.7c6.2 6.2 6.2 16.4 0 22.6l-192 192c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L265.4 256 84.7 75.3c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l192 192z"/>
+                            </svg>
+                        </button>
+                    </div>
+                
+                    <!-- Month Head -->
+                    <div class="cmsDatePicker__monthhead">
+                        ${daysOfWeek}
+                    </div>
+                    <!-- Month Days -->
+                    <div class="cmsDatePicker__month">
+                        <div class="cmsDatePicker__dayFrame">
+                            ${days}
+                        </div>
+                        <!-- Month Days -->
+                    </div>
+            
+                </div>`
+        }
 
         this.init();
     }
@@ -114,16 +113,8 @@ class CalendarControl {
     }
 
     setMinDate(d, m, y) {
-        // this.day = d;
-        // this.month = null;
-        // this.year = null;
         [this.day, this.month, this.year] = [+d, +m, +y];
-
-       // if (`${this.selectedYear}${this.selectedMonth}${this.selectedDay}` < `${y}${m}${d}`) {
-            [this.selectedDay, this.selectedMonth, this.selectedYear] = [+d, +m, +y];
-
-        //}
-
+        [this.selectedDay, this.selectedMonth, this.selectedYear] = [+d, +m, +y];
         this.renderDatepicker(+m, +y);
         this.onChange();
     }
@@ -183,14 +174,12 @@ class CalendarControl {
     renderDatepicker(month, year) {
         this.month = month;
         this.year = year;
-        console.log('renderDatepicker', month, year);
-
-        const monthCurrent = searchWizardDateTpl.monthCurrent(this.t.month[+month], month, year);
+        const monthCurrent = this.tpl.monthCurrent(this.t.month[+month], month, year);
 
         const daysOfWeek = this.renderDaysOfWeek();
         const days = this.renderDays(month, year);
         
-        this.$root.innerHTML = searchWizardDateTpl.outer(monthCurrent, daysOfWeek, days)
+        this.$root.innerHTML = this.tpl.outer(monthCurrent, daysOfWeek, days)
     }
 
     /**
@@ -199,7 +188,7 @@ class CalendarControl {
     renderDaysOfWeek() {
         let html = '';
         for(let i = 0; i < 7; i++) {
-            html += searchWizardDateTpl.dayOfWeek(this.t.days_of_week[i])
+            html += this.tpl.dayOfWeek(this.t.days_of_week[i])
         }
         return html
     }
@@ -227,7 +216,7 @@ class CalendarControl {
 
         // Предыдущий месяц
         for (let i = lastMonthDays - dayOfWeekFirst + 2; i <= lastMonthDays; i++) {
-            html += searchWizardDateTpl.day(i, lastMonthMonth, lastMonthYear, true, false)
+            html += this.tpl.day(i, lastMonthMonth, lastMonthYear, true, false)
         }
 
         const maxDays = this.daysInMonth(month, year);
@@ -243,7 +232,7 @@ class CalendarControl {
                 passed = true
             }
 
-            html += searchWizardDateTpl.day(i, month, year, passed, selected)
+            html += this.tpl.day(i, month, year, passed, selected)
         }
 
 
@@ -256,7 +245,7 @@ class CalendarControl {
         const nextDaysCount = 7 - (dayOfWeekFirst - 1 + maxDays) % 7;
         if (nextDaysCount < 7) {
             for (let i = 1; i <= nextDaysCount; i++) {
-                html += searchWizardDateTpl.day(i, nextMonthMonth, nextMonthYear, true, false)
+                html += this.tpl.day(i, nextMonthMonth, nextMonthYear, true, false)
             }
         }
         return html

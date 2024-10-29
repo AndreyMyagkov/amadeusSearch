@@ -82,8 +82,6 @@ const i18n_ibe = {
 
 class IBESearch {
     constructor(i18n_ibe, lng, targetPage) {
-       
-
         this.i18n_ibe = i18n_ibe;
         this.currentLng = lng;
         this.t = this.i18n_ibe[this.currentLng];
@@ -199,7 +197,6 @@ class IBESearch {
             searchParam.delete('depap')
         }
         
-        console.log('submit', searchParam.toString())
         document.location.href = this.targetPage + '?' + searchParam.toString()
     }
 
@@ -224,7 +221,6 @@ class IBESearch {
         this.$root.querySelectorAll("[i18ntc]").forEach(_ => {
             const key = _.getAttribute('i18ntc')
             const n = +_.innerText.trim();
-            console.log(n, key)
             const value = this.tc(n, this.t[key]);
             _.innerText = `${n} ${value}`;
         })
@@ -270,18 +266,13 @@ class IBESearch {
         document.querySelector('.ibe-destination__dropdown').classList.add('hide');
 
         this.form.rid = id
-
-        console.log(`region: ${id} ${name}`)
-
     }
 
     setDuration(value) {
-        console.log(`duration: ${value}`)
         this.form.dur = value - 1;
     }
 
     setAirports(value) {
-        console.log(`airports: ${value}`)
         let valueString = '';
         if (!value.length) {
 
@@ -306,7 +297,6 @@ class IBESearch {
         }
     }
     setDateDeparture(d, m, y) {
-        console.log('ddate', d, m, y)
         const $dateDeparure = document.querySelector('.js-ibe-departure-date__val');
         $dateDeparure.innerHTML = this.dateToFormat(d, m, y, 'dd.mm.yyyy');
 
@@ -316,22 +306,17 @@ class IBESearch {
 
         if (!this.form.rdate || (this.form.rdate && this.form.rdate < this.form.ddate)) {
             const [sd, sm, sy] = this.destinationDateControl.getSelectedDate();
-            console.log('sd', sd, sm, sy)
-            this.arrivalDateControl.setMinDate(sd, sm, sy);
-            // this.arrivalDateControl.setDay(d, m, y);
-            // this.arrivalDateControl.renderDays(m, y)
+            const dateTomorrow = new Date(+sy, +sm, +sd + 1);
+            this.arrivalDateControl.setMinDate(dateTomorrow.getDate(), dateTomorrow.getMonth(), dateTomorrow.getFullYear());
             document.querySelector('.js-ibe-arrival-date__dropdown').classList.remove('hide');
         }
     }
 
     setDateArrival(d, m, y) {
-        console.log('rdate', d, m, y)
         const $dateArrival = document.querySelector('.js-ibe-arrival-date__val');
         $dateArrival.innerHTML = this.dateToFormat(d, m, y, 'dd.mm.yyyy');
 
         this.form.rdate = this.dateToFormat(d, m, y, 'yyyy-mm-dd');
-        //document.querySelector('.js-ibe-arrival-date__dropdown').classList.add('hide');
-        console.log('rdate', d, m, y)
     }
 
     dateToFormat(d, m, y, format) {
@@ -359,7 +344,6 @@ class IBESearch {
      * @param {*} 
      */
     setTourists(data) {
-        console.log('torists: ', data)
         let valueString = `${data.adult} ${this.t.tourist_adults} / ${data.child ? data.child + ' ' + this.t.tourist_child : this.t.tourist_child_none}`;
         
         document.querySelector('.js-ibe-tourist__val').innerHTML = valueString;

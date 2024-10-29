@@ -1,12 +1,4 @@
 /**
- * +0. Мультияз
- * +1. Клик инпут - открыть дроп
- * 2. Грузить список, если нет, показать лоадер TODO:
- * 3. Показать популярные, если пусто или <3
- * 4. По вводу фильтровать список
- * 5. Клик - выбор, отправить в общий класс
- */
-/**
  * Класс контрола поиска региона по строке
  * Если строка ввода пустая или короче 3 символов
  * выводит популярные регионы, иначе полный список, отфильтрованный
@@ -14,23 +6,17 @@
  */
 class DestinationControl {
     constructor(i18n) {
-        console.log('DestinationControl start');
-
         this.t = i18n;
         this.$root = document.querySelector('.ibe-destination__content')
         this.$componentInput = document.querySelector('.ibe-destination__input');
 
-       // this.$closeBtn = document.querySelector('.js-closeDestinationDropDown');
-
-        this.regions = this.flatRegions(window.regions);
-        this.topRegions = window.topRegions;
+        this.regions = this.flatRegions(window.IBERegions);
+        this.topRegions = window.IBETopRegions;
 
 
         this.searchStr = '';
 
         this.tpl = {
-            //TODO: translate
-            //TODO: loader
             component: (t) => {
                 return `
                 <ul class="ibe-destination__list"></ul>
@@ -42,7 +28,6 @@ class DestinationControl {
             },
         }
         
-
         this.init();
         
     }
@@ -50,7 +35,6 @@ class DestinationControl {
     init() {
         this.renderComponent();
         this.eventListener();
-        
     }
 
     /** 
@@ -64,9 +48,7 @@ class DestinationControl {
     /**
      * Обработчик ивентов
      */
-    eventListener() {
-        //keyup change
-        
+    eventListener() {       
         // Инпут в форме
         this.$componentInput.addEventListener('click', e => this.inputProcess(e.target.value))
         this.$componentInput.addEventListener('keyup', e => this.inputProcess(e.target.value))
