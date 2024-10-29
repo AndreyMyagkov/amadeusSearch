@@ -51,6 +51,8 @@
 }
 .ibe {
     color: var(--ibe-color-font);
+    text-align: left;
+    font-size: 16px;
 }
 
 /****/
@@ -118,6 +120,9 @@
     text-decoration: none;
     font-size: 14px;
     border-radius: 5px 5px 0 0;
+}
+a.ibe-tabs__tab {
+    color:#fff;
 }
 .ibe-tabs__tab:not(.active) {
     cursor: pointer;

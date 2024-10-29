@@ -200,7 +200,7 @@ class IBESearch {
 
     setDuration(value) {
         console.log(`duration: ${value}`)
-        this.form.dur = value;
+        this.form.dur = value - 1;
     }
 
     setAirports(value) {
