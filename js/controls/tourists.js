@@ -27,7 +27,6 @@ class TouristsControl {
     }
 
     renderAges() {
-        console.log(this.$root)
         this.$root.querySelectorAll('.js-ibe-tourists__age-select').forEach(_ => {
             let optionsHTML = '';
             for (let age = 1; age <= 17; age++) {

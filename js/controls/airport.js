@@ -26,7 +26,6 @@ class AirportControl {
             countryHtml += this.renderCountry(country.countryName, groupHTML, i === 0);
         })
         html += countryHtml;
-        //console.log(html)
         this.$root.innerHTML = html
 
     }

@@ -281,7 +281,7 @@ class IBESearch {
             valueString = value[0].name;
         }
         if (value.length > 1) {
-            valueString = this.tc(value.length, this.t.departure_airports)
+            valueString = value.length + ' ' + this.tc(value.length, this.t.departure_airports)
         }
         document.querySelector('.js-ibe-departure__val').innerHTML = valueString;
 
@@ -354,5 +354,5 @@ class IBESearch {
     
 }
 
-const _IBESearch = new IBESearch(i18n_ibe, 'ru', '');
+
 

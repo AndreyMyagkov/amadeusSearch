@@ -4,8 +4,6 @@
  */
 class CalendarControl {
     constructor(selector, name, i18n) {
-        console.log('IBEControlCalendar start', name);
-
         this.selector = selector;
         this.name = name;
         this.$root = document.querySelector(selector);
@@ -30,7 +28,7 @@ class CalendarControl {
             <div class="cmsDatePicker-months__current" data-month="${month}" data-year="${year}">${monthName} ${year}</div>`,
 
             day: (day, month, year, passed, selected) => `
-            <div class="cmsDatePicker__day ${passed ? 'passed' : ''} ${selected ? 'active' : ''}"  data-day="${`${+day + 100}`.substring(1)}" data-month="${`${+month + 100}`.substring(1)}" data-year="${year}">
+            <div class="cmsDatePicker__day ${passed ? 'passed' : ''} ${selected ? 'active' : ''}"  data-day="${new String(day).padStart(2, '0')}" data-month="${new String(month).padStart(2, '0')}" data-year="${year}">
             <span>${day}</span></div>`,
 
             dayOfWeek: (name) => `<div class="cmsDatePicker__monthday">${name}</div>`,
@@ -104,7 +102,6 @@ class CalendarControl {
                     $oldSelectedDay.classList.remove('active');
                 }
                 $day.classList.add('active');
-                console.log($day.dataset.day, $day.dataset.month, $day.dataset.year)
                 
                 this.setDay($day.dataset.day, $day.dataset.month, $day.dataset.year)
             }
@@ -157,8 +154,6 @@ class CalendarControl {
         const resultDate = new Date(this.year, this.month + diff);
         const resultMonth = resultDate.getMonth();
         const resultYear = resultDate.getFullYear();
-
-        console.log(this.month, this.month + diff, resultMonth, resultYear)
  
         this.renderDatepicker(resultMonth, resultYear)
 
